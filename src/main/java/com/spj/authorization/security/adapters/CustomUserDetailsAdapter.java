@@ -19,7 +19,8 @@ public class CustomUserDetailsAdapter implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    @Cacheable("UserDetails")
+    //Cashing user creating issue for password grant, its only working 1 time.
+    //@Cacheable("UserDetails")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user;
         try {
