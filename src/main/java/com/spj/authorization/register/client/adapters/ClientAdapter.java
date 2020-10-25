@@ -32,7 +32,7 @@ public class ClientAdapter implements IClientAdapter {
                 .refreshTokenValidity(serviceConfig.getRefreshTokenValidity())
                 .resourceIds(null)
                 .scope("read")
-                .webServerRedirectUri(registerClientRequest.getRedirectUri())
+                .webServerRedirectUri("https://"+registerClientRequest.getRedirectUri())
                 .build();
 
         oAuthClientsDetailsRepository.saveAndFlush(oAuthClientDetails);
