@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:8080
     description: local
-  - url: https://authorization.herokuapp.com
+  - url: https://authorization-spj.herokuapp.com
     description: heroku
 tags:
   - name: registerUser

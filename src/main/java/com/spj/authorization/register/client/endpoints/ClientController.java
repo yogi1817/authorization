@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.validation.Valid;
 
 @Controller
-@CrossOrigin(origins = "*")
 @Slf4j
 @RequiredArgsConstructor
-@PreAuthorize("permitAll()")
 public class ClientController implements RegisterClientApi {
     private final IClientAdapter clientAdapter;
 

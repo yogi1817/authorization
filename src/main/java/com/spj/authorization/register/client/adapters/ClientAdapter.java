@@ -37,6 +37,7 @@ public class ClientAdapter implements IClientAdapter {
 
         oAuthClientsDetailsRepository.saveAndFlush(oAuthClientDetails);
 
-        return null;
+        return new RegisterClientResponse().clientName(registerClientRequest.getClientName())
+                .message("Customer added");
     }
 }
