@@ -1,0 +1,161 @@
+openapi: 3.0.2
+info:
+  title: Register Services API
+  description: API used to register user for FindMySalon Services
+  version: Initial
+servers:
+  - url: http://localhost:8080
+    description: local
+  - url: https://authorization.herokuapp.com
+    description: heroku
+tags:
+  - name: registerUser
+  - name: registerClient
+paths:
+  /barber/register:
+    post:
+      operationId: registerBarber
+      tags:
+        - registerUser
+      summary: Register a barber
+      description: Register a barber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterBarberRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterBarberResponse'
+  /customer/register:
+    post:
+      operationId: registerCustomer
+      tags:
+        - registerUser
+      summary: Register a customer
+      description: Register a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCustomerRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterCustomerResponse'
+  /client/register:
+    post:
+      operationId: registerClient
+      tags:
+        - registerClient
+      summary: Register a client
+      description: Register a client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterClientRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterClientResponse'
+components:
+  schemas:
+    RegisterBarberRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        password:
+          type: string
+        storeName:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - phone
+        - password
+        - storeName
+    RegisterBarberResponse:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+    RegisterCustomerRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        password:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - phone
+        - password
+    RegisterCustomerResponse:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        message:
+          type: string
+    RegisterClientRequest:
+      type: object
+      properties:
+        clientName:
+          type: string
+        clientPassword:
+          type: string
+        redirectUri:
+          type: string
+      required:
+        - clientName
+        - clientPassword
+        - redirectUri
+    RegisterClientResponse:
+      type: object
+      properties:
+        clientName:
+          type: string
+        message:
+          type: string

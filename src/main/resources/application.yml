@@ -1,0 +1,53 @@
+info:
+  description: This is a oauth server for find my salon spring boot project
+
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /findmysalon
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: none
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.jdbc.lob.non_contextual_creation: true
+  application:
+    name: authorization
+  profiles:
+    active: default
+
+  flyway:
+    baseline-on-migrate: true
+    schemas:
+      - auth
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com:
+      spg:
+        authorization: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+
+spj:
+  security:
+    scope: default
+    accessTokenValidity: 1800
+    refreshTokenValidity: 1800
+    resourceIds: default

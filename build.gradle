@@ -1,0 +1,102 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'org.openapi.generator' version '5.0.0-beta2'
+	id 'idea'
+	id 'eclipse'
+}
+
+group = 'com.spj.authorization'
+version = '1.1'
+sourceCompatibility = '14'
+
+springBoot{
+	mainClassName = "com.spj.authorization.AuthorizationApplication"
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.SR8")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+	compileOnly 'org.projectlombok:lombok'
+	compileOnly 'org.mapstruct:mapstruct:1.4.1.Final'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	//implementation "io.springfox:springfox-boot-starter:3.0.0"
+	implementation 'org.openapitools:openapi-generator-gradle-plugin:5.0.0-beta2'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'io.springfox:springfox-spring-web:2.9.2'
+
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+openApiGenerate {
+	inputSpec = "$rootDir/apis/register-user.yml".toString()
+	generatorName = "spring"
+	apiPackage = "com.spj.register.openapi.endpoint"
+	modelPackage = "com.spj.register.openapi.resources"
+	generateModelTests = false
+	generateApiTests = false
+	library = "spring-boot"
+	groupId = "com.spj.register.salon"
+	configOptions = [
+			useTags: "true",
+			configPackage: "com.spj.register.openapi.config",
+			dateLibrary: "java14-localdatetime",
+			java14: "true",
+			delegatePattern: "true",
+			useBeanValidation: "true",
+			useOptional: "true",
+			swaggerDocketConfig  : "false"
+	]
+	outputDir = "$rootDir/build/generated".toString()
+}
+
+compileJava{
+	dependsOn tasks.openApiGenerate
+	options.compilerArgs = [
+			'-s', "$rootDir/build/generated"
+	]
+}
+
+sourceSets.main.java.srcDirs("$rootDir/build/generated/src/main/java")
