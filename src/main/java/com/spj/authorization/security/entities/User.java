@@ -34,21 +34,12 @@ public class User implements Serializable {
     @Column(name = "user_id", unique = true, nullable = false, columnDefinition = "serial")
     private Long userId;
 
-    private String firstName;
-    private String lastName;
-    private String middleName;
     private String email;
-    private String phone;
     private String password;
     @CreationTimestamp
     private OffsetDateTime createDate;
     @UpdateTimestamp
     private OffsetDateTime modifyDate;
-    private String storeName;
-    private String loginSource;
-    private Long favouriteSalonId;
-    @Builder.Default
-    private boolean verified = false;
     @Builder.Default
     private int failedLoginAttempt = 0;
     @Builder.Default

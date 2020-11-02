@@ -12,46 +12,6 @@ tags:
   - name: registerUser
   - name: registerClient
 paths:
-  /barber/register:
-    post:
-      operationId: registerBarber
-      tags:
-        - registerUser
-      summary: Register a barber
-      description: Register a barber
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RegisterBarberRequest'
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RegisterBarberResponse'
-  /customer/register:
-    post:
-      operationId: registerCustomer
-      tags:
-        - registerUser
-      summary: Register a customer
-      description: Register a customer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RegisterCustomerRequest'
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RegisterCustomerResponse'
   /client/register:
     post:
       operationId: registerClient
@@ -74,71 +34,6 @@ paths:
                 $ref: '#/components/schemas/RegisterClientResponse'
 components:
   schemas:
-    RegisterBarberRequest:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        password:
-          type: string
-        storeName:
-          type: string
-      required:
-        - firstName
-        - lastName
-        - email
-        - phone
-        - password
-        - storeName
-    RegisterBarberResponse:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-    RegisterCustomerRequest:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        password:
-          type: string
-      required:
-        - firstName
-        - lastName
-        - email
-        - phone
-        - password
-    RegisterCustomerResponse:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        message:
-          type: string
     RegisterClientRequest:
       type: object
       properties:

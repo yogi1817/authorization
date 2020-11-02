@@ -1,5 +1,7 @@
 package com.spj.authorization;
 
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -21,5 +23,19 @@ public class AuthorizationApplication {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        String uri = System.getenv("CLOUDAMQP_URL");
+        if (uri == null)
+            uri = "amqp://guest:guest@localhost";
+
+        CachingConnectionFactory factory = new CachingConnectionFactory();
+        factory.setUri(uri);
+        factory.setRequestedHeartBeat(30);
+        factory.setConnectionTimeout(30);
+
+        return factory;
     }
 }

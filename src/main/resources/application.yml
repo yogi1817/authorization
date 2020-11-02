@@ -25,6 +25,19 @@ spring:
     name: authorization
   profiles:
     active: default
+  cloud:
+    stream:
+      bindings:
+        user-registered-in:
+          destination: user-registered
+      rabbit:
+        bindings:
+          user-registered-in:
+            consumer:
+              autoBindDlq: true
+              republishToDlq: true
+              prefetch: 50
+              maxConcurrency: 50
 
   flyway:
     baseline-on-migrate: true

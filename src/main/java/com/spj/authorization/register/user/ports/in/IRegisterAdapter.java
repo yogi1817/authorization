@@ -1,9 +1,9 @@
 package com.spj.authorization.register.user.ports.in;
 
-import com.spj.register.openapi.resources.*;
+import com.spj.authorization.register.user.messaging.UserRegisterPayload;
 
 public interface IRegisterAdapter {
-    RegisterBarberResponse registerBarber(RegisterBarberRequest registerBarberRequest);
+    void registerUser(UserRegisterPayload userRegisterPayload);
 
-    RegisterCustomerResponse registerCustomer(RegisterCustomerRequest registerBarberRequest);
+    void updatePassword(UserRegisterPayload payload);
 }

@@ -1,3 +1,4 @@
+/*
 package com.spj.authorization.register.user.dao;
 
 import com.spj.authorization.security.entities.Authorities;
@@ -10,11 +11,13 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
 
+*/
 /**
  * 
  * @author Yogesh Sharma
  *
- */
+ *//*
+
 @Repository
 public class UserDao implements IUserDao {
 
@@ -22,7 +25,7 @@ public class UserDao implements IUserDao {
 	private EntityManager entityManager;
 	
 	@Override
-    public List<User> searchUserWithEmailAndAuthority(String email, String authority) {
+    public List<User> searchUserWithEmailAndAuthority(String email, long authorityId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         
@@ -30,7 +33,7 @@ public class UserDao implements IUserDao {
         Join<User, Authorities> authorityJoin = user.join("authority");
  
         Predicate emailPredicate = criteriaBuilder.equal(user.get("email"), email);
-        Predicate authorityPredicate = criteriaBuilder.equal(authorityJoin.get("authority"), authority);
+        Predicate authorityPredicate = criteriaBuilder.equal(authorityJoin.get("authorityId"), authorityId);
         
         TypedQuery<User> userQuery = entityManager.createQuery(
         									criteriaQuery.select(user)
@@ -41,7 +44,8 @@ public class UserDao implements IUserDao {
         return userQuery.getResultList();
     }
 
-	/*@Override
+	*/
+/*@Override
 	public List<User> searchUserWithUserIdAndAuthority(Long userId, String authority) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
@@ -59,5 +63,7 @@ public class UserDao implements IUserDao {
         								);
 
         return userQuery.getResultList();
-	}*/
+	}*//*
+
 }
+*/

@@ -5,18 +5,10 @@ create table auth.authorities(
 
 create table auth.user(
     user_id BIGSERIAL PRIMARY KEY NOT NULL,
-    first_name varchar(255) NOT NULL,
-    last_name varchar(255) NOT NULL,
-    middle_name varchar(255),
     email varchar(255) UNIQUE NOT NULL,
-    phone varchar(255),
     password varchar(255) NOT NULL,
     create_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_DATE,
     modify_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_DATE,
-    store_name varchar(255),
-    login_source varchar(255),
-    favourite_salon_id int8,
-    verified BOOLEAN,
     failed_login_attempt INTEGER,
     is_locked BOOLEAN,
     authority_id int8 REFERENCES authorities(authority_id)
