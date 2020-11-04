@@ -62,5 +62,5 @@ spj:
   security:
     scope: default
     accessTokenValidity: 1800
-    refreshTokenValidity: 1800
+    refreshTokenValidity: 31536000
     resourceIds: default
