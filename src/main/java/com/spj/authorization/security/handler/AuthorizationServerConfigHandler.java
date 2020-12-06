@@ -1,28 +1,29 @@
-package com.spj.authorization.security.config;
+package com.spj.authorization.security.handler;
 
-import com.spj.authorization.security.adapters.CustomClientDetailsAdapter;
-import com.spj.authorization.security.entities.User;
-import com.spj.authorization.security.pojo.CustomUser;
-import com.spj.authorization.security.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
+import com.spj.authorization.security.adapters.CustomClientDetailsAdapter;
+import com.spj.authorization.security.entities.User;
+import com.spj.authorization.security.pojo.CustomUser;
+import com.spj.authorization.security.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
 @Slf4j
-public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfigHandler extends AuthorizationServerConfigurerAdapter {
 
     private AuthenticationManager authenticationManager;
     //private final PasswordEncoder passwordEncoder;

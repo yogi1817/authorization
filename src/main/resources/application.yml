@@ -38,6 +38,14 @@ spring:
               republishToDlq: true
               prefetch: 50
               maxConcurrency: 50
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 132526406861-o8sbqn7tm6p4n1be2mjt1ci90a7q0eep.apps.googleusercontent.com
+            clientSecret: TVtg6ArrUez3e77FLQhMIZWR
+            redirectUri: http://localhost:8080/findmysalon/oauth2/callback/google
 
   flyway:
     baseline-on-migrate: true
@@ -64,3 +72,4 @@ spj:
     accessTokenValidity: 1800
     refreshTokenValidity: 31536000
     resourceIds: default
+    oauthTokenUrl: http://localhost:8080/findmysalon/oauth/token

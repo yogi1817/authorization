@@ -1,0 +1,3 @@
+spj:
+  security:
+    oauthTokenUrl: https://authorization-spj.herokuapp.com/findmysalon/oauth/token
