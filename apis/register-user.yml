@@ -32,6 +32,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegisterClientResponse'
+  /oauth/no-ops:
+    get:
+      operationId: getAccessToken
+      tags:
+        - customOAuth
+      summary: Get access for a client based on authorization code
+      description: Get access for a client based on authorization code
+      parameters:
+        - in: header
+          name: authorization
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: code
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenResponse'
 components:
   schemas:
     RegisterClientRequest:
@@ -53,4 +78,15 @@ components:
         clientName:
           type: string
         message:
+          type: string
+    AuthTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        refresh_token:
+          type: string
+        email:
           type: string
