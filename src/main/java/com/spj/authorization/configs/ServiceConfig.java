@@ -31,4 +31,7 @@ public class ServiceConfig {
 
 	@Value("${spj.security.resourceIds}")
 	private String resourceIds;
+
+	@Value("${spj.security.oauthTokenUrl}")
+	private String oauthTokenUrl;
 }
