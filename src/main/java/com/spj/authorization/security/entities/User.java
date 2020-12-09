@@ -36,6 +36,10 @@ public class User implements Serializable {
 
     private String email;
     private String password;
+    private String name;
+    private String imageUrl;
+    private String socialLoginType;
+
     @CreationTimestamp
     private OffsetDateTime createDate;
     @UpdateTimestamp

@@ -57,6 +57,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthTokenResponse'
+  /oauth/test:
+    get:
+      operationId: getTest
+      tags:
+        - customOAuth
+      summary: Test
+      description: Test
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenResponse'
 components:
   schemas:
     RegisterClientRequest:

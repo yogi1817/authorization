@@ -46,7 +46,6 @@ spring:
             clientId: 132526406861-o8sbqn7tm6p4n1be2mjt1ci90a7q0eep.apps.googleusercontent.com
             clientSecret: TVtg6ArrUez3e77FLQhMIZWR
             redirectUri: http://localhost:8080/findmysalon/oauth2/callback/google
-
   flyway:
     baseline-on-migrate: true
     schemas:
@@ -64,7 +63,7 @@ logging:
         authorization: DEBUG
     org:
       springframework:
-        security: DEBUG
+        security: INFO
 
 spj:
   security:

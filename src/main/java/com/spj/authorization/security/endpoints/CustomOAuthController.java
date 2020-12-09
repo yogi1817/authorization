@@ -40,4 +40,9 @@ public class CustomOAuthController implements CustomOAuthApi {
     public ResponseEntity<AuthTokenResponse> getAccessToken(Optional<String> authorization, @NotNull @Valid String code) {
         return ResponseEntity.ok(iCustomOAuthAdapter.getOAuthToken(authorization, code));
     }*/
+
+    @Override
+    public ResponseEntity<AuthTokenResponse> getTest() {
+        return ResponseEntity.ok(new AuthTokenResponse().email("hello"));
+    }
 }
