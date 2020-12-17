@@ -48,7 +48,9 @@ public class AuthorizationCodeDetailsAdapter implements AuthorizationCodeService
     public OAuth2Authentication consumeAuthorizationCode(String code) throws InvalidGrantException {
         OAuth2Authentication oAuth2Authentication;
         OAuthApprovals oAuthApprovals = oAuthApprovalsRepository.findByCode(code);
-        if (oAuthApprovals != null && oAuthApprovals.getExpiresAt().isAfter(LocalDateTime.now())) {
+        if (oAuthApprovals != null
+                && oAuthApprovals.getExpiresAt().isAfter(LocalDateTime.now())
+                && oAuthApprovals.isActive()) {
             oAuth2Authentication = SerializationUtils.deserialize(oAuthApprovals.getToken());
             oAuthApprovals.setActive(false);
             oAuthApprovals.setLastModifiedAt(LocalDateTime.now());
