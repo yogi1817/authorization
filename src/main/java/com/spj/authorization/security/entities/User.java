@@ -48,6 +48,10 @@ public class User implements Serializable {
     @Column(name = "authority_id")
     private long authorityId;
 
+    private String name;
+    private String imageUrl;
+    private String socialLoginType;
+
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "authority_id", referencedColumnName = "authority_id", insertable = false, updatable = false)
     private Authorities authority;

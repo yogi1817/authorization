@@ -9,11 +9,14 @@ import lombok.SneakyThrows;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.security.oauth2.common.util.RandomValueStringGenerator;
 import org.springframework.security.oauth2.common.util.SerializationUtils;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +28,13 @@ public class AuthorizationCodeDetailsAdapter implements AuthorizationCodeService
 
     @Override
     public String createAuthorizationCode(OAuth2Authentication authentication) {
-        CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        String email = null;
+        if(authentication.getPrincipal() instanceof DefaultOidcUser){
+            email = ((DefaultOidcUser) authentication.getPrincipal()).getAttribute("email");
+        }else{
+            CustomUser customUser = (CustomUser) authentication.getPrincipal();
+            email = customUser.getEmail();
+        }
 
         generator.setLength(45);
         String code = generator.generate();
@@ -35,7 +44,7 @@ public class AuthorizationCodeDetailsAdapter implements AuthorizationCodeService
                 .expiresAt(LocalDateTime.now().plusMinutes(10))
                 .lastModifiedAt(LocalDateTime.now())
                 .scope(serviceConfig.getClientScope())
-                .userId(customUser.getEmail())
+                .userId(email)
                 .code(code)
                 .token(SerializationUtils.serialize(authentication))
                 .build();
