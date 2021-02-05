@@ -17,6 +17,7 @@ public class UserRegisterListener {
     @StreamListener(UserRegisteredSink.INPUT)
     @SneakyThrows
     public void userRegisterRequest(UserRegisterPayload payload){
+        log.debug("Input JSON:-> {}",payload.toString());
         if(payload.isUpdatePasswordRequest()){
             registerAdapter.updatePassword(payload);
         }else{
