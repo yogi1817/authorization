@@ -33,7 +33,7 @@ public class RegisterAdapter implements IRegisterAdapter {
     public void updatePassword(UserRegisterPayload userRegisterPayload) {
         User user = userRepository.findByEmail(userRegisterPayload.getEmail());
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegisterPayload.getPassword()));
         userRepository.saveAndFlush(user);
 
         log.debug("User registered successfully {}", user.getEmail());
