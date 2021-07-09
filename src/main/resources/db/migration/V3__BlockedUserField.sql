@@ -1,2 +1,2 @@
 ALTER TABLE auth.user
-    ADD COLUMN is_Blocked BOOLEAN;
+    ADD COLUMN is_Blocked BOOLEAN DEFAULT FALSE;
