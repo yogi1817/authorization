@@ -24,7 +24,7 @@ public class ClientAdapter implements IClientAdapter {
         OAuthClientDetails oAuthClientDetails = OAuthClientDetails.builder()
                 .accessTokenValidity(serviceConfig.getAccessTokenValidity())
                 .additionalInformation(null)
-                .authorities(UserType.CUSTOMER.name())
+                .authorities(UserType.CLIENT.name())
                 .authorizedGrantTypes("authorization_code,refresh_token")
                 .autoapprove(null)
                 .clientId(registerClientRequest.getClientName())

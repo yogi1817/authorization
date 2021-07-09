@@ -45,6 +45,9 @@ public class User implements Serializable {
     @Builder.Default
     private boolean isLocked = false;
 
+    @Builder.Default
+    private boolean isBlocked = false;
+
     @Column(name = "authority_id")
     private long authorityId;
 

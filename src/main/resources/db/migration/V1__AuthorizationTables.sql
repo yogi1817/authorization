@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS auth;
+
 create table auth.authorities(
     authority_id BIGSERIAL PRIMARY KEY,
     authority varchar(50) not null

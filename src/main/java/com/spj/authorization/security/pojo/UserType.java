@@ -6,7 +6,7 @@ package com.spj.authorization.security.pojo;
  *
  */
 public enum UserType {
-	BARBER("BARBER"), CUSTOMER("CUSTOMER"), SUPERUSER("SUPERUSER");
+	BARBER("BARBER"), CUSTOMER("CUSTOMER"), SUPERUSER("SUPERUSER"), CLIENT("CLIENT");
     private final String value;
 
     public String getResponse() {

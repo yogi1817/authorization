@@ -1,0 +1,1 @@
+insert into auth.authorities values (4, 'CLIENT');

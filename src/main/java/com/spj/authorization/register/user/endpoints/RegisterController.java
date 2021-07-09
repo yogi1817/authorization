@@ -1,6 +1,6 @@
-/*
 package com.spj.authorization.register.user.endpoints;
 
+import com.spj.authorization.register.user.adapters.RegisterMapper;
 import com.spj.authorization.register.user.ports.in.IRegisterAdapter;
 import com.spj.register.openapi.endpoint.RegisterUserApi;
 import com.spj.register.openapi.endpoint.RegisterUserApiDelegate;
@@ -18,17 +18,21 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class RegisterController implements RegisterUserApi {
     private final IRegisterAdapter registerAdapter;
+    private final RegisterMapper registerMapper;
 
     @Override
     public ResponseEntity<RegisterUserResponse> registerUser(RegisterUserRequest registerUserRequest) {
         log.debug("Inside BarberController registerBarber service");
-        return ResponseEntity.ok(registerAdapter.registerUser(registerUserRequest));
+        if(registerUserRequest.getUpdatePasswordRequest()){
+            return ResponseEntity.ok(registerAdapter.updatePassword(registerMapper.toEntity(registerUserRequest)));
+        }else{
+            return ResponseEntity.ok(registerAdapter.registerUser(registerMapper.toEntity(registerUserRequest)));
+        }
     }
 
-    @Override
+    /*@Override
     public ResponseEntity<RegisterUserResponse> updatePassword(@Valid RegisterUserRequest registerUserRequest) {
         log.debug("Inside BarberController registerBarber service");
         return ResponseEntity.ok(registerAdapter.registerUser(registerUserRequest));
-    }
+    }*/
 }
-*/
